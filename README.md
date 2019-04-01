@@ -38,7 +38,7 @@ After download the package,  decompress it with
 ```
 tar -xvf weights.tar
 ```
-Subsequently, the weight files(saliency.h5 and regression.h5) will be placed in the 'model' directory.
+Subsequently, the weight files(```saliency.h5``` and ```regression.h5```) will be placed in the ```model``` directory.
 
 ## Usage
 
