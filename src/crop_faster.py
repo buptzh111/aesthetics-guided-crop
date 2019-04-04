@@ -80,7 +80,7 @@ def crop():
             saliency_img = cv2.resize(saliency_img, (224, h3 * 224 / w3), interpolation=cv2.INTER_CUBIC)
         else:
             saliency_img = cv2.resize(saliency_img, (w3 * 224 / h3, 224), interpolation=cv2.INTER_CUBIC)
-        saliency_image = np.expand_dims(saliency_img, axis=0)
+        saliency_image = np.expand_dims(saliency_img, axis=0).astype('float32')
         saliency_image /= 255.0
 
         offset = model_regression.predict(saliency_image, batch_size=1)[0]
