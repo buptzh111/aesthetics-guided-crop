@@ -49,5 +49,9 @@ bash crop_image.sh
 If you want to crop your own image (or image list), you can put your image file or directory into the ```example_images``` directory,
 or overwrite the content ```crop_image.sh```:
 ```
-python -u crop.py [path]
+python -u src/crop.py [path]
+```
+For a faster version, change the code into:
+```
+python -u src/crop_faster.py [path]
 ```
