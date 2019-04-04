@@ -59,13 +59,13 @@ def crop():
 
         saliency_map = model_saliency.predict(img, batch_size=1, verbose=0)
         saliency_map = saliency_map.reshape(h2, w2, 1)
-        saliency_image = cv2.resize(saliency_map, (60, 40), interpolation=cv2.INTER_CUBIC)
+        saliency_image = cv2.resize(saliency_map, (224, 224), interpolation=cv2.INTER_CUBIC)
 
         saliency_box = Minimum_Rectangle(saliency_image, r=0.9)
 
         saliency_box = [saliency_box[0], saliency_box[0] + saliency_box[3],
                         saliency_box[1], saliency_box[1] + saliency_box[2]]
-        saliency_box = normalization(60, 40, saliency_box)
+        saliency_box = normalization(224, 224, saliency_box)
         saliency_region = recover_from_normalization_with_order(w - 1, h - 1, saliency_box)
         saliency_img = image[saliency_region[1]: saliency_region[3],saliency_region[0]: saliency_region[2],:]
         w3, h3 = saliency_region[2] - saliency_region[0], saliency_region[3] - saliency_region[1]
