@@ -51,10 +51,10 @@ def crop():
         image = cv2.imread(i, -1)
         h, w = image.shape[0], image.shape[1]
         image_for_crop = image.copy()
-        if w <= h:
-            image_for_crop = cv2.resize(image_for_crop, (224, h * 224 / w), interpolation=cv2.INTER_CUBIC)
-        else:
-            image_for_crop = cv2.resize(image_for_crop, (w * 224 / h, 224), interpolation=cv2.INTER_CUBIC)
+        #if w <= h:
+         #   image_for_crop = cv2.resize(image_for_crop, (224, h * 224 / w), interpolation=cv2.INTER_CUBIC)
+        #else:
+         #   image_for_crop = cv2.resize(image_for_crop, (w * 224 / h, 224), interpolation=cv2.INTER_CUBIC)
         h1, w1 = image_for_crop.shape[0], image_for_crop.shape[1]
 
         h2, w2 = (h1 / 16 + 1) * 16, (w1 / 16 + 1) * 16
