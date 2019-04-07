@@ -17,6 +17,21 @@ On CUHK-ICD:
 |P2|0.816|0.035|
 |P3|0.805|0.036|
 
+With the faster version:
+On FLMS:
+
+|        |IOU     |BDE     |
+| :------: | :------: | :------: |
+|FLMS|0.842|0.029|
+
+On CUHK-ICD:
+
+|        |IOU     |BDE     |
+| :------: | :------: | :------: |
+|P1|0.827|0.032|
+|P2|0.817|0.035|
+|P3|0.805|0.036|
+
 ## Requirements
 python 2.7+ (or python 3)
 
