@@ -21,7 +21,7 @@ import model as m
 DRAW = True
 def crop():
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+    #os.environ["CUDA_VISIBLE_DEVICES"] = "3"
     img_path = sys.argv[1]
     if os.path.isfile(img_path):
         img_names = [img_path]
