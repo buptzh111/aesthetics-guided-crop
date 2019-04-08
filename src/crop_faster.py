@@ -18,9 +18,10 @@ from keras.preprocessing.image import img_to_array, array_to_img
 from PIL import Image, ImageDraw
 import model as m
 
+DRAW = True
 def crop():
 
-    #os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
     img_path = sys.argv[1]
     if os.path.isfile(img_path):
         img_names = [img_path]
@@ -111,12 +112,23 @@ def crop():
         reg_time += (reg_time_end - reg_time_start)
         print i, saliency_box, offset
         final_region = add_offset(w, h, saliency_box, offset)
-
         final_region_to_file = ' '.join([image_name] + [str(u) for u in final_region])
         saliency_region_to_file = ' '.join([image_name] + [str(u) for u in saliency_box])
         crop_regions.append(final_region_to_file)
         saliency_regions.append(saliency_region_to_file)
 
+        if DRAW:
+            final_region = recover_from_normalization_with_order(w, h, final_region)
+
+            pr = ImageDraw.Draw(img)
+            # draw crop box on original image.
+
+            pr.rectangle(final_region, None, 'yellow')
+            pr.rectangle(saliency_region, None, 'blue')
+
+            img.save(os.path.join(crop_img_save_path, image_name))
+
+    total_time = saliency_time + crop_time + reg_time
     print 'Average Total Time : %.3f s.' \
           'Average Saliency Time : %.3f s.' \
           'Average Crop Time : %.3f s.' \
@@ -127,8 +139,8 @@ def crop():
     with open(os.path.join(crop_img_save_path, 'saliency_region_coordinate.txt'), 'w') as f:
         f.write('\n'.join(saliency_regions))
 
-    #return crop_img_save_path
-
 if __name__ == '__main__':
     crop()
+
+
 
