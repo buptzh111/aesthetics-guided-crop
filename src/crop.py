@@ -114,7 +114,7 @@ def crop():
         saliency_regions.append(saliency_region_to_file)
 
         if DRAW:
-            final_region = recover_from_normalization_with_order(w, h, final_region)
+            final_region = recover_from_normalization_with_order(w1, h1, final_region)
 
             pr = ImageDraw.Draw(img)
             # draw crop box on original image.
