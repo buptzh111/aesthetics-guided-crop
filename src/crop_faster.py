@@ -31,7 +31,7 @@ def crop():
     else:
         raise Exception("The input path is not a image file or a image directory.")
 
-    crop_img_save_path = 'crop_result' if sys.argv[2] is None else sys.argv[2]
+    crop_img_save_path = 'crop_result' if len(sys.argv) <= 2 else sys.argv[-1]
     if not os.path.isdir(crop_img_save_path):
         os.makedirs(crop_img_save_path)
 
