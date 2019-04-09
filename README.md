@@ -74,3 +74,4 @@ The crop result will save in ```crop_result``` directory.If you want to save at 
 ```
 python -u src/crop.py [img_path] [save_path]
 ```
+We also record the coordinates of cropping box and saliency box and we normalized them.The format of data is ```[x1,x2,y1,y2]```,where ```x``` denotes height, ```y```denotes width.```(x1,y1)```is the top-left coordinate of a box, and ```(x2,y2)``` is the right-down.  
