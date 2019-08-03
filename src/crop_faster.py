@@ -38,8 +38,8 @@ def crop():
     #set model
     model_saliency = m.SaliencyUnet(state='test').BuildModel()
     model_regression = m.ofn_net(state='test').set_model()
-    model_saliency.load_weights('models/saliency.h5')
-    model_regression.load_weights('models/regression.h5')
+    model_saliency.load_weights('model/saliency.h5')
+    model_regression.load_weights('model/regression.h5')
 
     crop_regions = []
     saliency_regions = []
@@ -53,7 +53,6 @@ def crop():
         image_name = i.split('/')[-1]
         img = Image.open(i)
         img = img.convert('RGB')
-        #img = get_shape(img, ratio, resize)
 
         image = np.asarray(img)
 
@@ -86,14 +85,10 @@ def crop():
         x2 = (x + h) / float(h_r)
         y1 = y / float(w_r)
         y2 = (y + w) / float(w_r)
-        # print x1, x2, y1, y2
         if x2 > 1 or y2 > 1:
             x1, x2, y1, y2 = create_default_box(0.9, 'normal')
         saliency_box = [x1, x2, y1, y2]
-        #print 'box:', saliency_box
         saliency_region = recover_from_normalization_with_order(w1 - 1, h1 - 1, saliency_box)
-        # print saliency_region
-        #print saliency_region, img.size
         saliency_img = img.crop(saliency_region)
         w4, h4 = saliency_img.size
 
@@ -101,8 +96,6 @@ def crop():
             saliency_img = saliency_img.resize((224, h4 * 224 / w4), Image.ANTIALIAS)
         else:
             saliency_img = saliency_img.resize((w4 * 224 / h4, 224), Image.ANTIALIAS)
-        # saliency_img.save('lalala.jpg')
-        # exit()
         saliency_image = img_to_array(saliency_img)
         saliency_image = np.expand_dims(saliency_image, axis=0)
         saliency_image /= 255.0
@@ -110,7 +103,7 @@ def crop():
         offset = model_regression.predict(saliency_image, batch_size=1)[0]
         reg_time_end = time.time()
         reg_time += (reg_time_end - reg_time_start)
-        print i, saliency_box, offset
+        #print i, saliency_box, offset
         final_region = add_offset(w, h, saliency_box, offset)
         final_region_to_file = ' '.join([image_name] + [str(u) for u in final_region])
         saliency_region_to_file = ' '.join([image_name] + [str(u) for u in saliency_box])
