@@ -105,7 +105,7 @@ def crop():
         offset = model_regression.predict(saliency_image, batch_size=1)[0]
         reg_time_end = time.time()
         reg_time += (reg_time_end - reg_time_start)
-        print i, saliency_box, offset
+        #print i, saliency_box, offset
         final_region = add_offset(w, h, saliency_box, offset)
 
         final_region_to_file = ' '.join([image_name] + [str(u) for u in final_region])
