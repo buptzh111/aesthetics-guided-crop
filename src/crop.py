@@ -38,8 +38,8 @@ def crop():
     #set model
     model_saliency = m.SaliencyUnet(state='test').BuildModel()
     model_regression = m.ofn_net(state='test').set_model()
-    model_saliency.load_weights('models/saliency.h5')
-    model_regression.load_weights('models/regression.h5')
+    model_saliency.load_weights('model/saliency.h5')
+    model_regression.load_weights('model/regression.h5')
 
     crop_regions = []
     saliency_regions = []
